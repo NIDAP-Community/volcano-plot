@@ -1,0 +1,31 @@
+name: Validate Volcano Plot application
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: NIDAP-Community/OMIX
+          ref: 0ea6223129de6d98d69469027c19fa1887b59f6a
+          path: canonical-omix
+      - name: Verify pinned scientific export
+        run: |
+          set -euo pipefail
+          cmp R/Volcano_Plot_Enhanced.R canonical-omix/modules/OMIX-Volcano-Plot/R/Volcano_Plot_Enhanced.R
+          cmp scripts/run_volcano_plot.R canonical-omix/modules/OMIX-Volcano-Plot/scripts/run_volcano_plot.R
+          cmp schemas/interface.yml canonical-omix/modules/OMIX-Volcano-Plot/schemas/interface.yml
+          cmp module.yml canonical-omix/modules/OMIX-Volcano-Plot/module.yml
+      - run: container/build_docker.sh volcano-plot:ci
+      - run: container/smoke_test.sh volcano-plot:ci
+      - run: container/parity_test.sh volcano-plot:ci
