@@ -5,4 +5,5 @@ out="$(mktemp -d "${TMPDIR:-/tmp}/volcano-smoke.XXXXXX")"
 docker run --rm --platform linux/amd64 --user "$(id -u):$(id -g)" --mount "type=bind,src=${root}/test_data,dst=/data,readonly" --mount "type=bind,src=${out},dst=/output" "${1:-volcano-plot:local}" --deg_table /data/deg.tsv --output_dir /output
 test -s "${out}/volcano_plot.png"
 test -s "${out}/volcano_plot_data.csv"
+for file in figures/volcano_plot.png tables/volcano_plot_data.csv logs/sessionInfo.txt RUN_METADATA.md run_manifest.json; do test -s "${out}/${file}" || exit 1; done
 printf 'Volcano Plot container smoke test passed: %s\n' "${out}"

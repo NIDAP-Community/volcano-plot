@@ -3,10 +3,11 @@ FROM ${BASE_IMAGE}
 WORKDIR /app
 COPY R/ R/
 COPY scripts/ scripts/
+COPY entrypoint.R ./
 COPY schemas/ schemas/
 COPY test_data/ test_data/
 COPY module.yml renv.lock ./
 RUN mkdir -p /data /output && useradd --create-home --uid 10001 --shell /usr/sbin/nologin volcano && chown --recursive volcano:volcano /app /data /output
 USER volcano
-ENTRYPOINT ["Rscript", "--vanilla", "/app/scripts/run_volcano_plot.R"]
+ENTRYPOINT ["Rscript", "--vanilla", "/app/entrypoint.R"]
 CMD ["--help"]
