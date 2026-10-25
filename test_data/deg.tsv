@@ -1,0 +1,7 @@
+GeneName	B-A_logFC	B-A_pval	B-A_adjpval
+Gene1	2.1	0.001	0.005
+Gene2	1.6	0.010	0.030
+Gene3	-2.3	0.002	0.008
+Gene4	-1.4	0.020	0.050
+Gene5	0.2	0.700	0.800
+Gene6	0.5	0.400	0.600
