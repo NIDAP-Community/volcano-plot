@@ -4,11 +4,6 @@ Portable DEG-result visualization component derived from canonical OMIX Volcano
 Plot. Supply a validated upstream DEG artifact; it does not perform differential
 expression itself.
 
-## Status
-
-Local candidate only. It has passed a synthetic DEG-table container smoke test
-but is not published or OncoChat-enabled.
-
 ## Input and output
 
 Stage one validated DEG table read-only under `/data` and declare its path.
@@ -20,5 +15,5 @@ docker run --rm --platform linux/amd64 \
 ```
 
 The root output retains `volcano_plot.png` and `volcano_plot_data.csv`. The
-application adapter also writes stable copies to `figures/` and `tables/`, a
-session record under `logs/`, and `RUN_METADATA.md` plus `run_manifest.json`.
+tool also writes stable copies to `figures/` and `tables/`, a session record
+under `logs/`, and `RUN_METADATA.md` plus `run_manifest.json`.
